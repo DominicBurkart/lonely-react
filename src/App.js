@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Loneliness from "./loneliness"
+import Scale from "./autism"
 import calculateScore from "./calculate-score"
 import find from 'lodash/find'
 import 'whatwg-fetch'
@@ -16,7 +16,7 @@ class App extends Component {
   }
   endTask(name, data) {
     this.finalResult = calculateScore(name, data)
-    const postData = Object.assign({}, this.finalResult['lonely'].plotdata, {user_id: userID,
+    const postData = Object.assign({}, this.finalResult['generic_scale'].plotdata, {user_id: userID,
       study_id: studyID})
     $.post({
       url: "/studies.json",
@@ -63,7 +63,7 @@ class App extends Component {
           <pre>{JSON.stringify(this.finalResult, null, 2)}</pre>
         </div>
       ) : (
-        <Loneliness endTask={this.endTask}/>
+        <Scale endTask={this.endTask}/>
       )
     );
   }
