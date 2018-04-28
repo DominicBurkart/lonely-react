@@ -8,6 +8,7 @@
     "lodash": "^4.17.4",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
+    "react-native": "^0.54.4",
     "react-scripts": "1.0.17",
     "styletron-client": "^3.0.0-rc.3",
     "styletron-react": "^3.0.0-rc.3",

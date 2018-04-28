@@ -2,6 +2,7 @@
 import React from "react"
 import {styled} from "styletron-react"
 import LikertScale from "./likert-scale"
+import FreeResponse from "./free-response"
 import {GlobalButton, globalColors} from "./globals"
 
 const MainPrompt = styled('div', {
@@ -30,7 +31,7 @@ class LikertQuestionnaire extends React.Component<likertQProps, likertQState> {
   pages: Array<*>
   data: Object
   nextPage: () => void
-  
+
   static defaultProps = {
     RT: false
   }
@@ -48,9 +49,25 @@ class LikertQuestionnaire extends React.Component<likertQProps, likertQState> {
     const keyedItems = this.props.items.reduce((obj, cur, i) =>{ return {
       ...obj, [this.props.taskName + '_' + (i+1).toString()]: cur}}, {})
 
-    // make some pages with 4 items each
     this.pages = []
-    let index = 0
+
+    //start optionFreeResponse
+    this.pages[0] = []
+    this.pages[0].push(
+      <FreeResponse key="FreeResponse"
+                    name="NumFriends"
+                    options= {this.props.options}
+                    prompt= {"About how many close friends and close relatives "+
+                    "do you have (people you feel at ease with and can talk to"+
+                    " about what is on your mind)?"}
+                    returnSelected={this.selectOption}
+                    RT={this.props.RT}
+      />
+    )
+    //end FreeResponse
+
+    // make some pages with 4 items each
+    let index = this.pages.length
     for (let key in keyedItems) {
       if (keyedItems.hasOwnProperty(key)) {
         // create an empty array in the current pages if it doesn't exist yet (for 1st page)
@@ -77,7 +94,15 @@ class LikertQuestionnaire extends React.Component<likertQProps, likertQState> {
   }
 
   selectOption(item: string, value: Object) {
-    this.data[item] = value
+    console.log("in likert-questionnaire")
+    console.log(value)
+    console.log(value.value)
+    if (!Number.isNaN(Number.parseInt(value.value))) {
+      console.log("Is num")
+      this.data[item] = value
+    }else{
+      console.log("Not num")
+    }
   }
 
   nextPage() {

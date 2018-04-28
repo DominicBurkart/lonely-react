@@ -20,4 +20,3 @@ export default function Loneliness(props: {endTask: (string, string) => void}) {
     />
   )
 }
-

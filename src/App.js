@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Interpersonalreactivityindex from "./interpersonal-reactivity"
+import Likert from "./unlabeled_likert"
 import calculateScore from "./calculate-score"
 import find from 'lodash/find'
 import 'whatwg-fetch'
@@ -16,8 +16,10 @@ class App extends Component {
   }
   endTask(name, data) {
     this.finalResult = calculateScore(name, data)
-    const postData = Object.assign({}, this.finalResult["interpersonalreactivityindex"].plotdata, {user_id: userID,
-      study_id: studyID})
+    const postData = Object.assign({},
+      this.finalResult["unlabeled_likert"],
+      {user_id: userID, study_id: studyID})
+    console.log(this.finalResult);
     $.post({
       url: "/studies.json",
       headers: {
@@ -27,8 +29,7 @@ class App extends Component {
       data: {
         study: postData
       }
-    })
-      .then(returnValue => window.location = returnValue.redirect_url)
+    }).then(returnValue => window.location = returnValue.redirect_url)
     /*const postData = {
       method: 'POST',
       headers: {
@@ -57,13 +58,9 @@ class App extends Component {
   render() {
     return (
       this.state.isFinished ? (
-        <div>
-          Questionnaire completed. <br /> JSON data:
-          <br />
-          <pre>{JSON.stringify(this.finalResult, null, 2)}</pre>
-        </div>
+        <div></div>
       ) : (
-        <Interpersonalreactivityindex endTask={this.endTask}/>
+        <Likert endTask={this.endTask}/>
       )
     );
   }
