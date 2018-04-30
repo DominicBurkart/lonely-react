@@ -8,7 +8,7 @@ const options = ["Does not describe me at all", "Does not describe me", "Describ
 export default function Loneliness(props: {endTask: (string, string) => void}) {
   window.scrollTo(0,0)
   return (
-    <LikertQuestionnaire items={lonelinessItems}
+    <LikertQuestionnaire items={reactivityItems}
                          taskName={"interpersonalreactivityindex"}
                          options={options}
                          page1Prompt={"The following statements describe how people sometimes feel." +
