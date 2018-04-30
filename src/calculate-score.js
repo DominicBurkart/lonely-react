@@ -12,10 +12,10 @@ export default function calculateScore(taskName, data) {
     }
   })
   // recode the items that need to be reverse coded
-  const recodeItems = [1, 2, 6, 7, 8]
+  const recodeItems = [1, 5, 6, 9, 10, 15, 16, 19, 20]
   recodeItems.map((item) => {
       const rawValue = data[taskName + '_' + item].value
-      const recodedValue = 4 - rawValue
+      const recodedValue = 5 - rawValue
 
       recodedData[item] = recodedValue
     }
