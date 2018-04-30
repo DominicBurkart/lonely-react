@@ -21,17 +21,17 @@ class App extends Component {
             this.finalResult,
             {user_id: userID, study_id: studyID})
         console.log(postData);
-        // $.post({
-        //     url: "/studies.json",
-        //     headers: {
-        //         'X-CSRF-Token': this.getCSRFToken(),
-        //     },
-        //     dataType: 'json',
-        //     data: {
-        //         study: postData
-        //     }
-        // }).then(returnValue => window.location = returnValue.redirect_url)
-        // this.setState({isFinished: true})
+        $.post({
+            url: "/studies.json",
+            headers: {
+                'X-CSRF-Token': this.getCSRFToken(),
+            },
+            dataType: 'json',
+            data: {
+                study: postData
+            }
+        }).then(returnValue => window.location = returnValue.redirect_url)
+        this.setState({isFinished: true})
     }
 
     getCSRFToken() {
